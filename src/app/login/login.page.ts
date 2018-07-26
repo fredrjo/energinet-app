@@ -28,18 +28,9 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.auth.base64Login(this.email, this.password).then((response: Response) =>{
-      if (response.status === 401) {
-         this.showToast('Nope');
-         return false;
-      }
-      if (response.status === 0) {
-         this.showToast('Nope');
-         return false;
-      } else {
-        this.auth.setCurrentUser();
-        this.navCtrl.goRoot('/tabs');
-      }
+    this.auth.base64Login(this.email, this.password).then((response: any) => {
+      console.log(response);
+      this.navCtrl.goForward('/');
     })
     .catch(function(err){
       console.log(err);

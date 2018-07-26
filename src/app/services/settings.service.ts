@@ -6,9 +6,10 @@ import { Storage } from '@ionic/storage';
 })
 export class SettingsService {
   http: any;
-  baseUrl: String = 'https://www.energinet.net/';
-  // baseUrl: String = 'http://trulsnet.cebyc.int/energinet/energinet/';
-  // baseUrl : String = 'http://fredrik.cebyc.int/energinet/energinet/';
+  baseUrl: String;
+  defaultUrl: String = 'https://www.energinet.net/';
+  // defaultUrl: String = 'http://trulsnet.cebyc.int/energinet/energinet/';
+  // defaultUrl : String = 'http://fredrik.cebyc.int/energinet/energinet/';
   response: any;
   language: String = 'en_US';
   enetLang: String = 'en';
@@ -17,8 +18,10 @@ export class SettingsService {
 
   constructor(private storage: Storage) {
        this.storage.get('baseUrl').then(res => {
-          if (res != null) {
+          if (res !== null && res !== undefined) {
               this.baseUrl = res;
+          } else {
+            this.baseUrl = this.defaultUrl;
           }
        });
       this.storage.get('language').then(res => {
@@ -75,10 +78,7 @@ export class SettingsService {
       return myUser;
   }
   getToken() {
-      return this.storage.get('user').then(res => {
-          this.user = res;
-          return res;
-      });
+      return this.storage.get('token').then(res => res);
   }
   setToken(token) {
       return this.storage.set('token', token).then(() => true);

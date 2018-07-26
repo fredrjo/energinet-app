@@ -26,10 +26,12 @@ export class AuthService {
   }
   base64Login(username, password) {
     return this.connect.login(btoa(username + ':' + password))
-    .then(res => {
-      if (res['token'] != null) {
-        this.settings.setToken(res['token']).then(fix =>
+    .then((res: any) => {
+      console.log(res.token);
+      if (res.token != null) {
+        this.settings.setToken(res.token).then(fix =>
           this.setCurrentUser());
+          return res;
       } else {
         return res;
       }

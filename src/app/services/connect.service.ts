@@ -16,11 +16,14 @@ export class ConnectService {
   }
 
   login (authString) {
-      return this.http.get(this.settings.baseUrl + '/api/accessToken',
+      return this.http.get(this.settings.getBaseurl() + '/api/accessToken',
           { headers: { 'Authorization' : 'Basic ' + authString, 'Content-Type': 'application/json'} }
-          ).toPromise().then((res: Response) => res.json())
+          ).toPromise().then((res: Response) =>
+          {
+              console.log(res);
+              return res; })
           .catch(function(err) {
-              return err.status;
+              return false;
           });
   }
 
@@ -35,7 +38,7 @@ export class ConnectService {
   }
 
   getResource(resource) {
-    return this.storage.get('token').then(token =>
+    return this.settings.getToken().then(token =>
         {
           return this.http.get(this.settings.baseUrl + resource + '/',
               { headers: this.getHeaders(token) }
