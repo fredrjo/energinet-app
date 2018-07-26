@@ -1,0 +1,38 @@
+<ion-content class="login-content" padding>
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col col-6>
+      <img src="assets/img/logo.png"/>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <div class="login-box">
+    <form (ngSubmit)="login()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item>
+               <ion-label position="floating">Username</ion-label>
+              <ion-input type="text"  name="email" [(ngModel)]="email" required></ion-input>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password"  name="password" [(ngModel)]="password" required></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</ion-button>
+      </ion-row>
+    </form>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="signup-col">
+          <ion-button ion-button class="register-btn" block clear (click)="forgotPassword()">Forgot</ion-button>
+          <ion-button class="register-btn" block clear (click)="goSettings()"><ion-icon name="construct"></ion-icon>Settings</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConnectService } from '../services/connect.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-page-home',
@@ -11,7 +12,7 @@ export class HomePage implements OnInit {
   alarms: number;
   @ViewChild('content') content = null;
   online = true;
-  constructor(private connectService: ConnectService) {
+  constructor(private connectService: ConnectService, private navCtrl: NavController) {
     this.getResource('/api/app');
     this.items = null;
   }
@@ -58,6 +59,7 @@ export class HomePage implements OnInit {
   }
   writeToConsole(item) {
     console.log(item);
+    this.navCtrl.goForward('/buildings');
   }
 
 }
