@@ -1,0 +1,7 @@
+{
+  "name": "energinet-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
