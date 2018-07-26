@@ -1,10 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Home</ion-title>
+  <ion-toolbar color="primary">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-10>
+          <img src="assets/img/logo2.png"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <div *ngIf="online === false" padding>
+    <ion-grid>
+      <ion-row>
+          <ion-col col-10><span style="font-weight:bold;font-size: 1.5em"> {{t.translate('general', 'no_network')}}</span></ion-col>
+          <ion-col col-2><ion-icon style="font-size: 1.5em" color="danger" name="wifi"></ion-icon></ion-col>
+      </ion-row>
+      <ion-row style="padding-top: 4em">
+    <button (click)="reload()" ion-button block color="primary">{{t.translate('general', 'try_again')}}</button>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <div (click)="showMe(item)">
+        <ion-grid no-padding>
+          <ion-row>
+          <ion-col col-9>
+            <span class="{{ getIcon( item.designCue) }}"></span>
+            <span color="primary">{{ item.header.title }}</span>
+          </ion-col>
+          <ion-col col-3>
+            <ion-badge *ngIf="item.cardinality !=null">{{ getAlarmAmount() }}</ion-badge>
+          </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+     </ion-item>
+  </ion-list>
 </ion-content>
