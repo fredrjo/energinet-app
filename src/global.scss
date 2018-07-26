@@ -9,3 +9,82 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+$font-path: "/assets/fonts";
+
+$nunito-font-path: $font-path !default;
+ ion-content {background: url('/assets/img/clouds.jpg') no-repeat scroll 100% 100% !important;}
+ ion-list {background : inherit !important; }
+ ion-item {background : inherit !important; }
+/* nunito-regular - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$nunito-font-path}/nunito-v8-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Nunito Regular'), local('Nunito-Regular'),
+       url('#{$nunito-font-path}/nunito-v8-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$nunito-font-path}/nunito-v8-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$nunito-font-path}/nunito-v8-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('#{$nunito-font-path}/nunito-v8-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$nunito-font-path}/nunito-v8-latin-regular.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+@font-face {
+  font-family: 'icomoon';
+  src:  url('#{$nunito-font-path}/icomoon.eot?81qki9');
+  src:  url('#{$nunito-font-path}/icomoon.eot?81qki9#iefix') format('embedded-opentype'),
+    url('#{$nunito-font-path}/icomoon.ttf?81qki9') format('truetype'),
+    url('#{$nunito-font-path}/icomoon.woff?81qki9') format('woff'),
+    url('#{$nunito-font-path}/icomoon.svg?81qki9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="myicon-"], [class*=" myicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  color : #008da8;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.myicon-Reports:before {
+  content: "\e902";
+}
+.myicon-House:before {
+  content: "\e903";
+}
+.myicon-Configure:before {
+  content: "\e904";
+}
+.myicon-Alarms:before {
+  content: "\e900";
+}
+.myicon-The-Wall:before {
+  content: "\e901";
+}
+.myicon-sign-in:before {
+  content: "\f090";
+}
+.myicon-line-chart:before {
+  content: "\f201";
+}
+.myicon-server:before {
+  content: "\f233";
+}
+.myicon-earth:before {
+  content: "\e9ca";
+}
+* {
+  font-family: "Nunito", sans-serif !important;
+ 
+}
