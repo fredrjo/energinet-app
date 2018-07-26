@@ -12,7 +12,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items" (click)=" writeToConsole(item)">
           <ion-avatar slot="start" style="height: 100%;">
               <span class="{{ getIcon( item.designCue) }}"></span>
           </ion-avatar>
