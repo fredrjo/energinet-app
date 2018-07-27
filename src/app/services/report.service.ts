@@ -5,5 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class ReportService {
 
-  constructor() { }
+  constructor() {}
+
+  makeReport (content) {
+      return new Promise((resolve, reject) => {
+         const chart = content[0].report.chart;
+          resolve([chart]);
+          reject(['']);
+      });
+  }
 }

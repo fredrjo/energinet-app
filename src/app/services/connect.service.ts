@@ -18,8 +18,7 @@ export class ConnectService {
   login (authString) {
       return this.http.get(this.settings.getBaseurl() + '/api/accessToken',
           { headers: { 'Authorization' : 'Basic ' + authString, 'Content-Type': 'application/json'} }
-          ).toPromise().then((res: Response) =>
-          {
+          ).toPromise().then((res: Response) => {
               console.log(res);
               return res; })
           .catch(function(err) {
@@ -38,16 +37,56 @@ export class ConnectService {
   }
 
   getResource(resource) {
-    return this.settings.getToken().then(token =>
-        {
+    return this.settings.getToken().then(token => {
           return this.http.get(this.settings.baseUrl + resource + '/',
               { headers: this.getHeaders(token) }
               ).toPromise().then((res: Response) => {
                 console.log(res);
                 return res;
               }
-              ) .catch(function(err) { return err;
-          });
-        }
+              ) .catch(function(err) { return err; });
+        });
   }
+  getFile(filename) {
+    return this.http.get(this.settings.baseUrl + filename,
+        { headers: this.getHeaders('') }
+        ).toPromise().then(res => res)
+        .catch (function (err) {
+                return err;
+            })
+        ;
+}
+
+putResource(link, payload) {
+     return this.storage.get('token').then(token => {
+        return this.http.put(this.settings.baseUrl + link, payload,
+            { headers: this.getHeaders(token) }
+            ).toPromise().then(res => res)
+            .catch (function (err) {
+                return err;
+            });
+     });
+}
+
+postResource(link, payload) {
+     return this.storage.get('token').then(token => {
+        return this.http.post(this.settings.baseUrl + link, payload,
+            { headers: this.getHeaders(token) }
+            ).toPromise().then(res => res)
+            .catch (function (err) {
+                return err;
+            });
+        });
+ }
+
+ deleteResource(resource) {
+      return this.storage.get('token').then(token => {
+        return this.http.delete(this.settings.baseUrl + resource + '/',
+            { headers: this.getHeaders(token) }
+            ).toPromise().then(res => res)
+            .catch (function (err) {
+                return err;
+            });
+        });
+}
 }

@@ -19,7 +19,7 @@ export class AuthService {
   login () {
     return new Promise((res) => {
       const hasToken = this.storage.get('token');
-      res(hasToken)})
+      res(hasToken); })
     .catch(function(err) {
       return false; }
     );
