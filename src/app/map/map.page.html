@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>map</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-navbar color="primary">
+      <ion-title>{{ title }}</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+    <div *ngIf="noMap"><p style="font-size: 16px">{{ message }}</p></div>
+    <div #map id="map" style="height : 100vh"></div>
+  </ion-content>
