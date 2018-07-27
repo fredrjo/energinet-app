@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>wall</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color="primary">
+      <ion-title>
+        {{ wall }}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <div *ngFor="let section of stuff">
+      <div *ngFor="let col of section">
+        <div *ngFor="let item of col" style="padding-top:5px">
+          <span *ngIf="item[0] == 0" [innerHTML]=item[1]></span>
+          <span *ngIf="item[0] == 1" [innerHTML]=item[1]></span>
+          <span *ngIf="item[0] == 2" [innerHTML]=item[1]></span>
+          <button ion-button block color="secondary" *ngIf="item[0] == 3" (click)="linkTo(item[1])"><ion-icon name="link"></ion-icon> {{ item[2] }}</button>
+          <span *ngIf="item[0] == 4" [innerHTML]=item[1]></span>
+          <span *ngIf="item[0] == 5" [innerHTML]=item[1]></span>
+          <button ion-button block *ngIf="item[0] == 6" (click)="showReport(item[1])"><ion-icon name="podium"></ion-icon> {{ item[2] }}</button>
+        </div>
+      </div>
+    </div>
+  </ion-content>

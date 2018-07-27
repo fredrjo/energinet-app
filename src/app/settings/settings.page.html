@@ -1,9 +1,40 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color="primary">
+      <ion-title>{{t.translate('settings','title')}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <form (ngSubmit)="onSubmit()">
+    <ion-grid>
+          <ion-list>
+        <ion-row>
+        </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label floating>{{t.translate('settings','language')}}</ion-label>
+        <ion-select class="form-control" name="language" [(ngModel)]="settings.language">
+          <ion-option value="en_US">English</ion-option>
+          <ion-option value="de_DE">Deutsch</ion-option>
+          <ion-option value="nb_NO">Norsk bokmål</ion-option>
+          <ion-option value="se_SE">Svensk</ion-option>
+          <ion-option value="dk_DK">Dansk</ion-option>
+        </ion-select>
+     </ion-item>
+    </ion-row>
+  </ion-list>
+    <ion-row *ngIf="!isIos">
+      <ion-col>
+        <ion-item>
+          <ion-label>{{t.translate('settings','torch')}}</ion-label>
+          <ion-toggle class="form-control" name="torch" [(ngModel)]='settings.torch'></ion-toggle>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <button type="submit" class="form-control" ion-button block color="primary">{{t.translate('settings','save')}}</button>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+  </form>
+  </ion-content>

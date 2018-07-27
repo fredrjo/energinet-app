@@ -1,0 +1,36 @@
+$nunito-font-path: $font-path !default;
+@font-face {
+  font-family: 'icomoon';
+  src:  url('#{$nunito-font-path}/icomoon.eot?81qki9');
+  src:  url('#{$nunito-font-path}/icomoon.eot?81qki9#iefix') format('embedded-opentype'),
+    url('#{$nunito-font-path}/icomoon.ttf?81qki9') format('truetype'),
+    url('#{$nunito-font-path}/icomoon.woff?81qki9') format('woff'),
+    url('#{$nunito-font-path}/icomoon.svg?81qki9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+page-scorecard {
+  .notice {background-color : white; margin : 5px; padding :2%; white-space: normal}
+  .info {background-color : white; margin : 5px; padding : 2%;
+        white-space : normal}
+.notice padding  {    font-size : 4vw; color : #008da8}
+.info p {font-size : 4vw; color : black;}
+.neutral {font-size : large;white-space: nowrap; color : black;}
+.info {width : 100%;float : left;clear : both;}
+.good {font-size : 5vw;
+        font-weight: bold;
+        color : green;
+       white-space: nowrap;} 
+.bad {font-size : 5vw;
+        font-weight: bold;
+        color :red;
+       white-space: nowrap;}
+.neutral {font-size : 5vw;
+        font-weight: bold;
+        color : black;
+       white-space: nowrap;}
+
+p.info {color : white}
+.fixed-content {margin-bottom: 0px !important}
+.scroll-content {margin-bottom: 0px !important}
+}

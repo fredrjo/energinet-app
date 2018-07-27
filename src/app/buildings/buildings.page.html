@@ -1,9 +1,23 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>buildings</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color = "primary">
+      <ion-title>{{ item.header.title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content cache-view="false" #content>
+    <ion-list>
+      <ion-grid>
+        <ion-item *ngFor="let building of buildings" style="font-size: 16px" (click)="showMe(building)">
+          <ion-row>
+            <ion-col col-9>
+              {{ building.header.title }}
+            </ion-col>
+            <ion-col col-3>
+              <ion-badge *ngIf="building.cardinality > 0" color="danger">{{ building.cardinality - building.pendings }}</ion-badge>
+              <ion-badge *ngIf="building.cardinality > 0" color="yellow">{{ building.pendings }}</ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-grid>
+    </ion-list>
+  </ion-content>
+  

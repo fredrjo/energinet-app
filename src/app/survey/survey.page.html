@@ -1,9 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>survey</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color = "primary">
+      <ion-title> {{header}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <h1>{{title}}</h1>
+     <form [formGroup]="survey">
+      <div *ngFor="let question of form">
+        <form-element padding [isValid]="survey.controls[question.name].status=='VALID'" [element]="question" [ctrl]="question.name" (evaluate)="onValueChanged($event)"></form-element>
+        <span style="float: right; color : red;padding-right : 12px" *ngIf="survey.controls[question.name].errors">{{ writeError(survey.controls[question.name].errors) }}</span>
+      </div>
+    </form>
+    <button ion-button type="submit" *ngIf="survey.status == 'INVALID'" disabled block>{{ t.translate('settings', 'save' )}}</button>
+    <button ion-button type="submit" *ngIf="survey.status == 'VALID'" (click)="send()" block>{{ t.translate('settings', 'save' )}}</button>
+  </ion-content>

@@ -1,9 +1,21 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>scorecard</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color="primary" hide-tabs>
+      <ion-title>{{reportname}}</ion-title>
+    </ion-toolbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+    <h3 style="text-align: center;color :#008da8">{{this.title}}</h3>
+    <div padding id="chart_default" style="width : 100%; height : 80%">
+      <chart [options]="options"></chart> 
+    </div>
+      <ion-list *ngFor="let box of cardBoxes">
+        <ion-card class="info">
+          <scorebox [element]="box" [icon]="box.totalIndication"></scorebox>
+        </ion-card>
+      </ion-list>
+     
+  </ion-content>

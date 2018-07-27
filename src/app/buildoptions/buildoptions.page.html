@@ -1,9 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>buildoptions</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color="primary">
+      <ion-title>{{this.buildings.header.title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let scorecard of scorecards" style="font-size : 16px" (click)="showMe(scorecard)">
+        {{scorecard.header.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
