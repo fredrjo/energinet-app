@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'about', loadChildren: './about/about.module#AboutPageModule' },  { path: 'buildings', loadChildren: './buildings/buildings.module#BuildingsPageModule' },
+  { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
+  { path: 'api/myBuildings', loadChildren: './buildings/buildings.module#BuildingsPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'alarms', loadChildren: './alarms/alarms.module#AlarmsPageModule' },
+  { path: 'api/buildingAlarms', loadChildren: './alarms/alarms.module#AlarmsPageModule' },
   { path: 'buildoptions', loadChildren: './buildoptions/buildoptions.module#BuildoptionsPageModule' },
   { path: 'chart', loadChildren: './chart/chart.module#ChartPageModule' },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },

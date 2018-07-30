@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ConnectService } from '../services/connect.service';
 import { NavController } from '@ionic/angular';
 
@@ -7,7 +7,7 @@ import { NavController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   items: any;
   alarms: number;
   @ViewChild('content') content = null;
@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit() {
   }
-  ionViewWillEnter() {
+  ngAfterViewInit() {
     if (this.content != null) {
       this.content.resize();
     }

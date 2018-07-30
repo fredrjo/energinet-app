@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import {
   trigger,
   state,
@@ -6,9 +6,9 @@ import {
   transition,
   animate,
   keyframes } from '@angular/animations';
-import { ModalController, NavController, NavParams, LoadingController } from '@ionic/angular';
+import { ModalController, NavController, LoadingController } from '@ionic/angular';
 import { ConnectService } from '../services/connect.service';
-import { TranslationService } from '../services/translation.service';
+ import { TranslationService } from '../services/translation.service';
 import { AlarmsService } from '../services/alarms.service';
 import { ModalPage } from '../modal/modal.page';
 
@@ -36,7 +36,7 @@ import { ModalPage } from '../modal/modal.page';
     ]),
 ]
 })
-export class AlarmsPage implements OnInit {
+export class AlarmsPage implements OnInit, AfterContentInit, OnDestroy {
   item: any;
   alarms: any;
   link: any;
@@ -47,7 +47,6 @@ export class AlarmsPage implements OnInit {
   isEmpty: boolean;
   constructor(
       private navCtrl: NavController,
-      private params: NavParams,
       private connectService: ConnectService,
       private alarmSer: AlarmsService,
       private modalCtrl: ModalController,
@@ -55,31 +54,32 @@ export class AlarmsPage implements OnInit {
       private t: TranslationService) {
     }
     ngOnInit() {
-        this.item = this.params.get('item');
-        this.link = this.item.links.self.href;
+        // this.item = this.params.get('item');
+        // this.link = this.item.links.self.href;
         this.alarms = null;
-        this.getResource(this.link);
+        this.getResource('api/buildingAlarms');
         this.state = 'inactive';
         this.pending = 0;
         this.cardinality = 0;
         this.isEmpty = false;
     }
-    ionViewDidEnter() {
+    ngAfterContentInit() {
         const storedAlarms = this.alarmSer.getBuildingsAlarms(this.link);
         if (storedAlarms !== null) {
             this.pending = storedAlarms.pending;
             this.cardinality = storedAlarms.cardinality;
         }
       }
-    ionViewWillLeave() {
+    ngOnDestroy() {
         this.setAlarms();
     }
     async getResource(resource) {
         if (this.alarms == null) {
             const loading = await this.loadingCtrl.create({
-                content: this.t.translate('general', 'loading')
+                content: 'loading' // this.t.translate('general', 'loading')
             });
             loading.present();
+            console.log('fetching alarms');
             this.connectService.getResource(resource).then(response => {
                 if (response.content[0].designCue !== 'notice') {
                     this.alarms = response.content;
