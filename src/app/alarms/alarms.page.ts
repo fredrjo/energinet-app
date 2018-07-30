@@ -54,7 +54,7 @@ export class AlarmsPage implements OnInit {
       private loadingCtrl: LoadingController,
       private t: TranslationService) {
     }
-    ngOnInit(){
+    ngOnInit() {
         this.item = this.params.get('item');
         this.link = this.item.links.self.href;
         this.alarms = null;
@@ -74,9 +74,9 @@ export class AlarmsPage implements OnInit {
     ionViewWillLeave() {
         this.setAlarms();
     }
-    getResource(resource){
+    async getResource(resource) {
         if (this.alarms == null) {
-            const loading = this.loadingCtrl.create({
+            const loading = await this.loadingCtrl.create({
                 content: this.t.translate('general', 'loading')
             });
             loading.present();
@@ -91,24 +91,15 @@ export class AlarmsPage implements OnInit {
             });
         }
     }
-    presentProfileModal(alarm) {
-        const profileModal = this.modalCtrl.create(ModalPage, {
-          alarm : alarm, leave_a_comment : this.t.translate('contentElement',
-          'leave_a_comment'), delete : this.t.translate('general','delete')});
-        profileModal.onDidDismiss(data => { 
-            if (data != null) {
-                this.connectService.putResource(data.link, data.payload).then(response => {
-                    let index = this.alarms.indexOf(alarm);
-                    if (response.isChecked == false) {
-                        this.alarms[index].notes = response.notes;
-                        this.postponeAlarm(this.alarms[index]);
-                    } else {
-                        this.removeAlarm(this.alarms[index]);
-                    }
-                });
-            }
-        });
-        profileModal.present();
+    async presentProfileModal(alarm) {
+        const profileModal = await this.modalCtrl.create({
+            component : ModalPage,
+            componentProps : {
+                    alarm : alarm,
+                    leave_a_comment : this.t.translate('contentElement', 'leave_a_comment'),
+                    delete : this.t.translate('general', 'delete')},
+            });
+                return await profileModal.present();
     }
     removeAlarm(alarm) {
         const index = this.alarms.indexOf(alarm);
@@ -141,7 +132,6 @@ export class AlarmsPage implements OnInit {
             cardinality : this.cardinality,
             pending : this.pending
           });
-      }
-  }
+    }
 
 }
