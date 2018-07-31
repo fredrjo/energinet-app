@@ -5,5 +5,23 @@
 </ion-header>
 
 <ion-content padding>
-
+    <ion-content cache-view="false" #content>
+        <ion-list>
+          <ion-grid>
+            <ion-card *ngFor="let alarm of alarms" style="font-size: 16px" routerLink="{{alarm.link}}">
+              <ion-row>
+                <ion-col size="6">
+                  <div>{{ alarm.header.title }}</div>
+                  
+                </ion-col>
+                <ion-col>
+                  <ion-badge *ngIf="alarm.cardinality > 0" color="danger">{{ alarm.cardinality - alarm.pendings }}</ion-badge>
+                  </ion-col>
+                  <ion-col>
+                  <ion-badge *ngIf="alarm.cardinality > 0" color="yellow">{{ alarm.pendings }}</ion-badge>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-grid>
+        </ion-list>
 </ion-content>
