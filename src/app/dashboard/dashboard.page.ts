@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController } from '@ionic/angular';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ConnectService } from '../../app/services/connect.service';
 import { TranslationService } from '../../app/services/translation.service';
 import { WallPage } from '../wall/wall.page';
@@ -9,29 +9,28 @@ import { WallPage } from '../wall/wall.page';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, AfterViewInit {
 
   walls: any;
   items: any = null;
   @ViewChild('content') content;
   constructor(
     private navCtrl: NavController,
-    private params: NavParams,
     private t: TranslationService,
     private loadingCtrl: LoadingController,
     private connectService: ConnectService) {
   }
   ngOnInit() {
-    this.walls = this.params.get('item');
-    this.getResource(this.walls.links.self.href);
+    // this.walls = this.params.get('item');
+    this.getResource('api/dashboard');
   }
-  ionViewWillEnter() {
-    this.content.resize();
+  ngAfterViewInit() {
+    // this.content.resize();
   }
-  getResource(resource) {
+  async getResource(resource) {
     if (this.items == null) {
-      const loading = this.loadingCtrl.create({
-       content: this.t.translate('general', 'loading')
+      const loading = await this.loadingCtrl.create({
+       content: 'loading' // this.t.translate('general', 'loading')
       });
       loading.present();
       this.connectService.getResource(resource).then(response => {

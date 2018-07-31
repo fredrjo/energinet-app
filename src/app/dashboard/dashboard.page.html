@@ -1,24 +1,27 @@
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons>
       <ion-title>
-        {{ walls.header.title }}
+        the Wall
       </ion-title>
-    </ion-navbar>
+    </ion-toolbar>
   </ion-header>
   <ion-content #content>
     <ion-list>
-       <ion-item *ngFor="let item of items">
+       <ion-card *ngFor="let item of items">
          <ion-grid>
            <ion-row>
-             <ion-col col-1>
+             <ion-col size="2">
          <span class='myicon-The-Wall'></span>
              </ion-col>
-             <ion-col (click)="showMe(item)" col-11>
+             <ion-col routerLink="{{item.links.self.href}}" size="10">
               <span *ngIf="item.designCue != 'notice'" class="dashboardlist" color="primary">{{ item.header.title }}</span>
               <span *ngIf="item.designCue == 'notice'" class="dashboardlist">{{ item.header.subtitle }}</span>
              </ion-col>
            </ion-row>
          </ion-grid>
-       </ion-item>
+       </ion-card>
     </ion-list>
   </ion-content>

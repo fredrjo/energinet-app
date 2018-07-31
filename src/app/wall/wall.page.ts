@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ModalController, Platform } from '@ionic/angular';
+import { NavController, ModalController, Platform } from '@ionic/angular';
 import { ConnectService } from '../../app/services/connect.service';
 import { ParserService } from '../../app/services/parser.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -20,7 +20,6 @@ export class WallPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private iab: InAppBrowser,
-    private params: NavParams,
     private connectService: ConnectService,
     private platform: Platform,
     private parserService: ParserService,
@@ -28,8 +27,8 @@ export class WallPage implements OnInit {
     private sanitizer: DomSanitizer) {
   }
   ngOnInit() {
-    this.link = this.params.get('item');
-    this.getResource(this.link);
+    // this.link = this.params.get('item');
+    this.getResource('api/dashboard');
   }
    getResource(resource) {
     this.connectService.getResource(resource).then(response => {
@@ -54,10 +53,15 @@ export class WallPage implements OnInit {
       if (Response.chart !== undefined) {
         delete Response.chart.chart['height'];
         delete Response.chart.chart['width'];
-        const chartModal = this.modalCtrl.create(ChartPage); // , {result : Response});
-        chartModal.present();
-      }
-    });
+        this.showModal(Response);
+    }
+  });
+  }
+  async showModal(Response) {
+    const chartModal = await this.modalCtrl.create({
+      component : ChartPage,
+      componentProps : {result : Response } }) ;
+    return chartModal.present();
   }
 
 }

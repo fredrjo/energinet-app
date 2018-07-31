@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ConnectService } from '../services/connect.service';
+import { AlarmsService } from '../services/alarms.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -9,10 +10,10 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage implements OnInit, AfterViewInit {
   items: any;
-  alarms: number;
+  alarms: Number;
   @ViewChild('content') content = null;
   online = true;
-  constructor(private connectService: ConnectService, private navCtrl: NavController) {
+  constructor(private connectService: ConnectService, private navCtrl: NavController, alarmService: AlarmsService) {
     this.getResource('/api/app');
     this.items = null;
   }
@@ -47,7 +48,7 @@ export class HomePage implements OnInit, AfterViewInit {
     });
   }
   getAlarmAmount() {
-    return '5';
+    return 5;
   }
   showMe(item) {
     return 0;

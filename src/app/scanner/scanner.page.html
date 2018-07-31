@@ -1,9 +1,65 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>scanner</ion-title>
+  <ion-toolbar color="primary">
+      <ion-title>{{t.translate('qrscanner','readings')}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-content padding>
+    <ion-grid>
+      <ion-list>
+        <ion-row>
+          <ion-col size="7">
+            <ion-item>
+              <ion-label color="primary" stacked>{{t.translate('qrscanner','meterID')}}</ion-label>
+              <ion-input type="text" [(ngModel)]="meterId"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="5">
+            <ion-item no-lines>
+              <ion-button ion-button primary block (click)="scan()">{{t.translate('qrscanner','scanQRCode')}}</ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label color="primary" stacked>{{t.translate('qrscanner','date')}}</ion-label>
+              <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label color="primary" stacked>{{t.translate('qrscanner','time')}}</ion-label>
+              <ion-datetime displayFormat="HH:mm" [(ngModel)]="myDate"></ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">{{t.translate('qrscanner','value')}}</ion-label>
+              <ion-input type="number" placeholder="" [(ngModel)]="value" #here></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-button ion-button primary block (click)="ok()">{{t.translate('general','add')}}</ion-button>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-button ion-button color="danger" block (click)="clear()">{{t.translate('general','cancel')}}</ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item *ngIf = "amountPendings > 0" no-lines>
+            <ion-button ion-button primary block (click)="showPending()">{{t.translate('qrscanner','pending_readings')}}({{amountPendings}})</ion-button>
+          </ion-item>
+        </ion-row>
+      </ion-list>
+      <form (ngSubmit)="onSubmit()">
+      </form>
+    </ion-grid>
+  </ion-content>

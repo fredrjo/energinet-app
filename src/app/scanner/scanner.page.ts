@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, Input} from '@angular/core';
+import { Component, ViewChild, OnInit, Input, getModuleFactory} from '@angular/core';
 import { Events, ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Storage } from '@ionic/storage';
@@ -27,7 +27,7 @@ export class ScannerPage implements OnInit {
   amountFailed: number;
   focusValue: Boolean = false;
   hasScanned: Boolean = false;
-  currentMeter: String ='Julenissen';
+  currentMeter: String = 'Julenissen';
   lastReading = '';
   buildingName = '';
   @Input('pending') myPending;
@@ -91,10 +91,10 @@ export class ScannerPage implements OnInit {
         const newReading = {'meterID' : this.meterId, 'dateTime' : this.myDate,
         'value' : this.value, 'status' : 0, 'error' : 'No Internet connection'};
         obj.push(newReading);
-        this.connect.postResource('/api/meterReading', newReading).then(res => {
-          res.status = parseInt(res.status);
-          if (res.status === 0) {
-            this.storage.set('pending',obj).then(res => this.getReadingsAmount());
+        this.connect.postResource('/api/meterReading', newReading).then((response: Response) => {
+          // response.status = parseInt(response.status);
+          if (response.status === 0) {
+            this.storage.set('pending', obj).then(() => this.getReadingsAmount());
             this.showToast(this.t.translate('qrscanner', 'readings_will_be_sent')
             );
           } else if (res.status === 200 || res.status === 201) {
@@ -114,15 +114,20 @@ export class ScannerPage implements OnInit {
     this.hasScanned = false;
   }
   showPending(failed) {
-    this.storage.get('pending').then(res => {
-      const profileModal = this.modalCtrl.create('/PendingPage') ; /* , {failed : failed, pending : res,
+    this.storage.get('pending').then(res => {this.getModal3(failed, res); });
+  }
+  async getModal3(failed, res) {
+    const profileModal = await this.modalCtrl.create({
+      component : PendingPage,
+      componentProps : { failed : failed,
+        pending : res,
         clear : this.t.translate('qrscanner', 'remove'), resend : this.t.translate('qrscanner', 'resend'),
-        title : this.t.translate('qrscanner','pending_readings'),  value : this.t.translate('qrscanner', 'value'),
-        meterID : this.t.translate('qrscanner','meterID')});
-        */
-        profileModal.present();
-         profileModal.onDidDismiss(data => {this.getReadingsAmount()});
+        title : this.t.translate('qrscanner', 'pending_readings'),  value : this.t.translate('qrscanner', 'value'),
+        meterID : this.t.translate('qrscanner', 'meterID')
+      }
     });
+      return await profileModal.present();
+   //     profileModal.onDidDismiss(data => {this.getReadingsAmount(); });
   }
   parseUrl (scannedUrl) {
     const meterIdentifier = scannedUrl.substr(scannedUrl.lastIndexOf('=') + 1);
@@ -146,8 +151,8 @@ export class ScannerPage implements OnInit {
       return '';
     }
   }
-  showToast(mess) {
-    const myToast = this.toast.create({
+  async showToast(mess) {
+    const myToast = await this.toast.create({
       message: mess,
       duration: 3000,
       position: 'top'

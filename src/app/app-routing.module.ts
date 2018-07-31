@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'api/buildingAlarms', loadChildren: './alarms/alarms.module#AlarmsPageModule' },
   { path: 'buildoptions', loadChildren: './buildoptions/buildoptions.module#BuildoptionsPageModule' },
   { path: 'chart', loadChildren: './chart/chart.module#ChartPageModule' },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
+  { path: 'api/dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
   { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'scorecardlist', loadChildren: './scorecardlist/scorecardlist.module#ScorecardlistPageModule' },
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
   { path: 'survey', loadChildren: './survey/survey.module#SurveyPageModule' },
-  { path: 'wall', loadChildren: './wall/wall.module#WallPageModule' }
+  { path: 'api/dashboard/:id', loadChildren: './wall/wall.module#WallPageModule' }
 
 ];
 @NgModule({

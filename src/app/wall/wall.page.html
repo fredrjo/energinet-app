@@ -12,10 +12,10 @@
           <span *ngIf="item[0] == 0" [innerHTML]=item[1]></span>
           <span *ngIf="item[0] == 1" [innerHTML]=item[1]></span>
           <span *ngIf="item[0] == 2" [innerHTML]=item[1]></span>
-          <button ion-button block color="secondary" *ngIf="item[0] == 3" (click)="linkTo(item[1])"><ion-icon name="link"></ion-icon> {{ item[2] }}</button>
+          <ion-button block color="secondary" *ngIf="item[0] == 3" (click)="linkTo(item[1])"><ion-icon name="link"></ion-icon> {{ item[2] }}</ion-button>
           <span *ngIf="item[0] == 4" [innerHTML]=item[1]></span>
           <span *ngIf="item[0] == 5" [innerHTML]=item[1]></span>
-          <button ion-button block *ngIf="item[0] == 6" (click)="showReport(item[1])"><ion-icon name="podium"></ion-icon> {{ item[2] }}</button>
+          <ion-button block *ngIf="item[0] == 6" (click)="showReport(item[1])"><ion-icon name="podium"></ion-icon> {{ item[2] }}</ion-button>
         </div>
       </div>
     </div>
