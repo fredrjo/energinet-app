@@ -58,9 +58,5 @@ export class HomePage implements OnInit, AfterViewInit {
     'dashboard' : 'myicon-The-Wall', 'alarms_by_building': 'myicon-Alarms', 'score_card_menu_item' : 'myicon-server' };
     return myIcons[designCue];
   }
-  writeToConsole(item) {
-    console.log(item);
-    this.navCtrl.goForward('/buildings');
-  }
 
 }

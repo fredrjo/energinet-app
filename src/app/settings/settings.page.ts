@@ -34,7 +34,10 @@ export class SettingsPage implements OnInit {
        this.settings.setTorch(this.settings.torch);
     }
     this.settings.setLanguage(this.settings.language);
-    const message = this.toast.create({
+    this.confirmMessage();
+  }
+  async confirmMessage() {
+    const message = await this.toast.create({
       message: this.t.translate('settings', 'saved'),
       duration: 3000,
        position: 'top'

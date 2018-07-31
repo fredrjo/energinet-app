@@ -9,7 +9,7 @@ export class TranslationService implements OnInit {
 
   localizationUrl: any = 'applocalization.js';
   dictionary: any = [];
-  lang: any = 'en_US';
+  lang: any = 'nb_NO';
 
   constructor(private storage: Storage, private http: HttpClient) {
        this.storage.get('language').then((phrases => {

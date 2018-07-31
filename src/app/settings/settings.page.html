@@ -24,13 +24,13 @@
     </ion-row>
   </ion-list>
     <ion-row *ngIf="!isIos">
-      <ion-col>
-          <ion-label>{{t.translate('settings','torch')}}</ion-label>
+      
+          <ion-label>{{t.translate('settings', 'torch')}}</ion-label>
           <ion-toggle class="form-control" name="torch" [(ngModel)]='settings.torch'></ion-toggle>
-      </ion-col>
+      
     </ion-row>
     <ion-row>
-        <ion-button type="submit" class="form-control" ion-button block color="primary">{{t.translate('settings','save')}}</ion-button>
+        <ion-button type="submit" class="form-control"  block color="primary">{{t.translate('settings', 'save')}}</ion-button>
     </ion-row>
   </ion-grid>
   </form>
