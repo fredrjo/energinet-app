@@ -1,5 +1,8 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color = "primary">
+        <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
       <ion-title>{{t.translate('settings','title')}}</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -10,30 +13,24 @@
         <ion-row>
         </ion-row>
     <ion-row>
-      <ion-item>
-        <ion-label floating>{{t.translate('settings','language')}}</ion-label>
+        <ion-label>{{t.translate('settings','language')}}</ion-label>
         <ion-select class="form-control" name="language" [(ngModel)]="settings.language">
-          <ion-option value="en_US">English</ion-option>
-          <ion-option value="de_DE">Deutsch</ion-option>
-          <ion-option value="nb_NO">Norsk bokmål</ion-option>
-          <ion-option value="se_SE">Svensk</ion-option>
-          <ion-option value="dk_DK">Dansk</ion-option>
+          <ion-select-option value="en_US">English</ion-select-option>
+          <ion-select-option value="de_DE">Deutsch</ion-select-option>
+          <ion-select-option value="nb_NO">Norsk bokmål</ion-select-option>
+          <ion-select-option value="se_SE">Svensk</ion-select-option>
+          <ion-select-option value="dk_DK">Dansk</ion-select-option>
         </ion-select>
-     </ion-item>
     </ion-row>
   </ion-list>
     <ion-row *ngIf="!isIos">
       <ion-col>
-        <ion-item>
           <ion-label>{{t.translate('settings','torch')}}</ion-label>
           <ion-toggle class="form-control" name="torch" [(ngModel)]='settings.torch'></ion-toggle>
-        </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-item>
-        <button type="submit" class="form-control" ion-button block color="primary">{{t.translate('settings','save')}}</button>
-      </ion-item>
+        <ion-button type="submit" class="form-control" ion-button block color="primary">{{t.translate('settings','save')}}</ion-button>
     </ion-row>
   </ion-grid>
   </form>
