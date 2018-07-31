@@ -13,11 +13,12 @@ export class HomePage implements OnInit, AfterViewInit {
   alarms: Number;
   @ViewChild('content') content = null;
   online = true;
-  constructor(private connectService: ConnectService, private navCtrl: NavController, alarmService: AlarmsService) {
+  constructor(private connectService: ConnectService, private navCtrl: NavController, private alarmService: AlarmsService) {
     this.getResource('/api/app');
     this.items = null;
   }
   ngOnInit() {
+    this.alarms = this.alarmService.getAlarms();
   }
   ngAfterViewInit() {
     if (this.content != null) {
@@ -48,7 +49,7 @@ export class HomePage implements OnInit, AfterViewInit {
     });
   }
   getAlarmAmount() {
-    return 5;
+    return this.alarms;
   }
   showMe(item) {
     return 0;

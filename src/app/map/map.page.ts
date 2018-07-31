@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ConnectService } from '../../app/services/connect.service';
 import { AlarmsPage } from '../alarms/alarms.page';
-import { TranslationService } from '../../app/services/translation.service';
+import { TranslationService } from '../services/translation.service';
 declare var google: any;
 
 @Component({
@@ -25,19 +25,18 @@ export class MapPage implements OnInit {
     private navCtrl: NavController,
     private t: TranslationService,
     private loadingCtrl: LoadingController,
-    private navParams: NavParams,
     private connectService: ConnectService) {
   }
 
    ngOnInit() {
-    this.link = this.navParams.get('item');
-    this.title = this.link.header.title;
-     this.getResource(this.link.links.self['href']);
+    this.link = '/api/map';
+    this.title = 'Map';
+     this.getResource(this.link);
    }
-   getResource(resource) {
+   async getResource(resource) {
     if (this.myMap == null) {
-        const loading = this.loadingCtrl.create({
-        content: this.t.translate('general', 'loading')
+        const loading = await this.loadingCtrl.create({
+        content: 'loading' //  this.t.translate('general', 'loading')
       });
       loading.present();
       this.connectService.getResource(resource).then(response => {

@@ -1,7 +1,10 @@
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-toolbar color = "primary">
+        <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
       <ion-title>{{ title }}</ion-title>
-    </ion-navbar>
+    </ion-toolbar>
   </ion-header>
   <ion-content>
     <div *ngIf="noMap"><p style="font-size: 16px">{{ message }}</p></div>

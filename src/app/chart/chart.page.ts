@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ViewController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-page-chart',
@@ -11,13 +11,13 @@ export class ChartPage implements OnInit {
   options: Object;
   title: string;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private view: ViewController) {
+  constructor(private navCtrl: NavController) {
   }
   ngOnInit() {
-    this.title = this.navParams.get('result').name;
-    this.options = this.navParams.get('result').chart;
+    this.title = 'Dummy'; // this.navParams.get('result').name;
+    this.options = []; // this.navParams.get('result').chart;
   }
   dismiss() {
-    this.view.dismiss();
+   // this.view.dismiss();
   }
 }

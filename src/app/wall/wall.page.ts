@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, Platform } from '@ionic/angular';
 import { ConnectService } from '../../app/services/connect.service';
 import { ParserService } from '../../app/services/parser.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ChartPage } from '../chart/chart.page';
 import { DomSanitizer} from '@angular/platform-browser';
 
@@ -19,7 +19,7 @@ export class WallPage implements OnInit {
   stuff: any;
   constructor(
     private navCtrl: NavController,
-    private iab: InAppBrowser,
+    // private iab: InAppBrowser,
     private connectService: ConnectService,
     private platform: Platform,
     private parserService: ParserService,
@@ -28,7 +28,7 @@ export class WallPage implements OnInit {
   }
   ngOnInit() {
     // this.link = this.params.get('item');
-    this.getResource('api/dashboard');
+    this.getResource('api/dashboard/6529');
   }
    getResource(resource) {
     this.connectService.getResource(resource).then(response => {
@@ -40,7 +40,7 @@ export class WallPage implements OnInit {
     });
   }
   linkTo(address) {
-    this.iab.create(address, '_system');
+   // this.iab.create(address, '_system');
   }
   getYouTubeLink(adress) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(adress);

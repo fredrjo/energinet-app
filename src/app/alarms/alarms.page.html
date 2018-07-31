@@ -8,23 +8,45 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-content cache-view="false" #content>
-        <ion-list>
-          <ion-grid>
-            <ion-card *ngFor="let alarm of alarms" style="font-size: 16px" routerLink="{{alarm.link}}">
-              <ion-row>
-                <ion-col size="6">
-                  <div>{{ alarm.header.title }}</div>
-                  
-                </ion-col>
-                <ion-col>
-                  <ion-badge *ngIf="alarm.cardinality > 0" color="danger">{{ alarm.cardinality - alarm.pendings }}</ion-badge>
-                  </ion-col>
-                  <ion-col>
-                  <ion-badge *ngIf="alarm.cardinality > 0" color="yellow">{{ alarm.pendings }}</ion-badge>
-                </ion-col>
-              </ion-row>
-            </ion-card>
-          </ion-grid>
-        </ion-list>
+    <div *ngIf="isEmpty" padding><p>{{ message }}</p></div>
+  <ion-list>
+    <ion-item *ngFor="let alarm of alarms" @focusPanel>
+       <ion-card>
+        <ion-card-header>
+          <ion-item no-lines>
+            <ion-icon *ngIf="alarm.isPending === false" name="notifications" ion-text class="alarmicon" color="danger" item-right></ion-icon>
+            <ion-icon *ngIf="alarm.isPending === true" name="notifications" ion-text class="alarmicon" color="yellow" item-right></ion-icon>
+            <span style="font-weight : bold" [innerHTML]="alarm.header.title"></span>
+          </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <div style="white-space: normal;">
+          <p>{{ alarm.header.subtitle }}</p>
+          <span [innerHTML]="alarm.header.description"></span>
+          <hr />
+          <span *ngIf="alarm.notes.length > 0" >{{ t.translate('contentElement','with_comments') }} 
+            <ion-badge>{{alarm.notes.length}}</ion-badge>
+          </span>
+        </div>
+      </ion-card-content>
+           <ion-row style="text-align:center">
+             <ion-col col-4>
+               <button class="alarmbutton" ion-button (click)='presentProfileModal(alarm)' icon-only>
+                 <ion-icon color="primary" class="alarmicon" name="information-circle"></ion-icon>
+               </button>
+              </ion-col>
+              <ion-col col-4>
+                 <button *ngIf="alarm.isPending === false" class="alarmbutton" ion-button (click)='postponeAlarm(alarm)'  icon-only>
+                  <ion-icon color="yellow" class="alarmicon" name='lock' ></ion-icon>
+                 </button>
+              </ion-col>
+               <ion-col col-4>
+                <button ion-button (click)='removeAlarm(alarm)' class="alarmbutton" icon-only>
+                  <ion-icon color="secondary" class="alarmicon" name="checkmark-circle"></ion-icon>
+                </button>
+              </ion-col>
+           </ion-row>
+        </ion-card>
+      </ion-item>
+    </ion-list>
 </ion-content>
