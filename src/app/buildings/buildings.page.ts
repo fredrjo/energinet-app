@@ -23,10 +23,10 @@ export class BuildingsPage implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.title = 'Building';
-    this.getResource('api/myBuildings'); // this.item.links.self['href']);
+    this.getResource('api/buildingAlarms'); // this.item.links.self['href']);
   }
   ngAfterViewInit() {
-    this.content.resize();
+   // this.content.resize();
     if (this.buildings !== null) {
       for (let i = 0; i < this.buildings.length; i++) {
         const updatedAlarms = this.alarmSer.getBuildingsAlarms(this.buildings[i].links.self.href);

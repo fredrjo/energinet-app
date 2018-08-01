@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { NavController, NavParams, ViewController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { TranslationService } from '../../app/services/translation.service';
 import { ConnectService } from '../../app/services/connect.service';
 import { Storage } from '@ionic/storage';
@@ -20,20 +20,18 @@ export class PendingPage implements OnInit {
   myList: any [];
   constructor(
     private navCtrl: NavController,
-    private navParams: NavParams,
     private store: Storage,
     private connect: ConnectService,
-    private view: ViewController,
     private t: TranslationService) {
   }
   ngOnInit() {
-    this.cardHeader = this.navParams.get('meterID');
-    this.valueString = this.navParams.get('value');
-    this.buttonClear = this.navParams.get('clear');
-    this.buttonResend = this.navParams.get('resend');
-    this.title = this.navParams.get('title');
-    this.pending = this.navParams.get('pending');
-    this.failed = this.navParams.get('failed');
+    this.cardHeader = 'default'; // this.navParams.get('meterID');
+    this.valueString = 'default'; // this.navParams.get('value');
+    this.buttonClear = 'default'; // this.navParams.get('clear');
+    this.buttonResend = 'default'; // this.navParams.get('resend');
+    this.title = 'default'; // this.navParams.get('title');
+    this.pending = 'default'; // this.navParams.get('pending');
+    this.failed = false; // this.navParams.get('failed');
 
   }
   setUpList() {
@@ -42,13 +40,15 @@ export class PendingPage implements OnInit {
   }
 
   dismiss() {
-    this.view.dismiss(this.pending);
+   // this.view.dismiss(this.pending);
   }
 
   clear(leftovers= []) {
 
     this.store.remove('pending').then(res => {
-      this.store.set('pending', leftovers).then(res2 => this.view.dismiss(leftovers));
+      this.store.set('pending', leftovers).then(res2 => res2
+      //  this.view.dismiss(leftovers)
+      );
     });
   }
   send() {

@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
-  { path: 'api/myBuildings', loadChildren: './buildings/buildings.module#BuildingsPageModule' },
+  { path: 'api/buildingAlarms', loadChildren: './buildings/buildings.module#BuildingsPageModule', pathMatch: 'full' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'api/buildingAlarms', loadChildren: './alarms/alarms.module#AlarmsPageModule' },
-  { path: 'buildoptions', loadChildren: './buildoptions/buildoptions.module#BuildoptionsPageModule' },
+  { path: 'api/buildingAlarms/:id', loadChildren: './alarms/alarms.module#AlarmsPageModule' },
+  { path: 'api/myBuildings', loadChildren: './buildoptions/buildoptions.module#BuildoptionsPageModule' },
   { path: 'chart', loadChildren: './chart/chart.module#ChartPageModule' },
   { path: 'api/dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },

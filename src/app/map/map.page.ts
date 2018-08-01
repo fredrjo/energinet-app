@@ -3,7 +3,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 import { ConnectService } from '../../app/services/connect.service';
 import { AlarmsPage } from '../alarms/alarms.page';
 import { TranslationService } from '../services/translation.service';
-declare var google: any;
+declare const google: any;
 
 @Component({
   selector: 'app-page-map',

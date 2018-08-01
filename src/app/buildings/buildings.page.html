@@ -10,7 +10,7 @@
   <ion-content cache-view="false" #content>
     <ion-list>
       <ion-grid>
-        <ion-card *ngFor="let building of buildings" style="font-size: 16px" routerLink="{{building.link}}">
+        <ion-card *ngFor="let building of buildings" style="font-size: 16px" routerLink="{{ building.links.self.href }}">
           <ion-row>
             <ion-col size="6">
               <div>{{ building.header.title }}</div>

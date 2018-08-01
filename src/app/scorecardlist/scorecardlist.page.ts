@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { ScorecardPage } from '../scorecard/scorecard.page';
 import { SurveyPage } from '../survey/survey.page';
 import { OpeningHoursPage } from '../opening-hours/opening-hours.page';
@@ -18,7 +18,7 @@ export class ScorecardlistPage implements OnInit {
   @ViewChild('content') content;
   constructor(private navCtrl: NavController,
   private t: TranslationService,
-  private navParams: NavParams,
+
   private connectService: ConnectService) {
   }
   ngOnInit() {
@@ -48,13 +48,13 @@ export class ScorecardlistPage implements OnInit {
   }
   showMe(item) {
     if (item.designCue === 'form') {
-      this.navCtrl.push(SurveyPage, {item : item, title : this.menu.header.title});
+      this.navCtrl.goForward(SurveyPage, {item : item, title : this.menu.header.title});
     } else if (item.designCue === 'time') {
-      this.navCtrl.push(OpeningHoursPage, {item : item, title : this.menu.header.title});
+      this.navCtrl.goForward(OpeningHoursPage, {item : item, title : this.menu.header.title});
     } else if ((item.designCue === 'folder') || item.designCue === 'building') {
-       this.navCtrl.push(ScorecardlistPage, {item : item});
+      this.navCtrl.goForward(ScorecardlistPage, {item : item});
     } else {
-       this.navCtrl.push(ScorecardPage, {item : item});
+      this.navCtrl.goForward(ScorecardPage, {item : item});
     }
   }
 

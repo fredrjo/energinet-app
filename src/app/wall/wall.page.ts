@@ -5,6 +5,7 @@ import { ParserService } from '../../app/services/parser.service';
 // import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ChartPage } from '../chart/chart.page';
 import { DomSanitizer} from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-wall',
@@ -21,6 +22,7 @@ export class WallPage implements OnInit {
     private navCtrl: NavController,
     // private iab: InAppBrowser,
     private connectService: ConnectService,
+    private activatedRoute: ActivatedRoute,
     private platform: Platform,
     private parserService: ParserService,
     private modalCtrl: ModalController,
@@ -28,7 +30,8 @@ export class WallPage implements OnInit {
   }
   ngOnInit() {
     // this.link = this.params.get('item');
-    this.getResource('api/dashboard/6529');
+    const id = this.activatedRoute.snapshot.params.id;
+    this.getResource('api/dashboard/' + id);
   }
    getResource(resource) {
     this.connectService.getResource(resource).then(response => {

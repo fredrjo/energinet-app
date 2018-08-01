@@ -115,7 +115,7 @@ export class SurveyPage implements OnInit {
       this.isValid = false;
     }
   }
-  send() {
+  async send() {
     for (let i = 0; i < this.form.length; i++) {
         this.form[i].value = this.survey.controls[this.form[i].name].value;
     }
@@ -125,7 +125,7 @@ export class SurveyPage implements OnInit {
     } else {
         res = this.connectService.postResource(this.sendTo, '{"formElements" :' + JSON.stringify(this.form) + '}' );
     }
-    const message = this.toast.create({
+    const message = await this.toast.create({
       message: this.t.translate('settings', 'saved'),
       duration: 3000,
       position: 'top'

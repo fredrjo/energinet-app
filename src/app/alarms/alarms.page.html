@@ -15,7 +15,7 @@
         <ion-card-header>
           <ion-item no-lines>
             <ion-icon *ngIf="alarm.isPending === false" name="notifications" ion-text class="alarmicon" color="danger" item-right></ion-icon>
-            <ion-icon *ngIf="alarm.isPending === true" name="notifications" ion-text class="alarmicon" color="yellow" item-right></ion-icon>
+            <ion-icon *ngIf="alarm.isPending === true" name="notifications" ion-text class="alarmicon" color="warning" item-right></ion-icon>
             <span style="font-weight : bold" [innerHTML]="alarm.header.title"></span>
           </ion-item>
       </ion-card-header>
@@ -30,20 +30,20 @@
         </div>
       </ion-card-content>
            <ion-row style="text-align:center">
-             <ion-col col-4>
-               <button class="alarmbutton" ion-button (click)='presentProfileModal(alarm)' icon-only>
-                 <ion-icon color="primary" class="alarmicon" name="information-circle"></ion-icon>
-               </button>
+             <ion-col>
+              
+                 <ion-icon class="alarmicon" color="primary" name="information-circle" (click)='presentProfileModal(alarm)'></ion-icon>
+               
               </ion-col>
-              <ion-col col-4>
-                 <button *ngIf="alarm.isPending === false" class="alarmbutton" ion-button (click)='postponeAlarm(alarm)'  icon-only>
-                  <ion-icon color="yellow" class="alarmicon" name='lock' ></ion-icon>
-                 </button>
+              <ion-col>
+                
+                  <ion-icon *ngIf="alarm.isPending === false" color="danger" class="alarmicon"  name='lock' (click)='postponeAlarm(alarm)'></ion-icon>
+                 
               </ion-col>
-               <ion-col col-4>
-                <button ion-button (click)='removeAlarm(alarm)' class="alarmbutton" icon-only>
-                  <ion-icon color="secondary" class="alarmicon" name="checkmark-circle"></ion-icon>
-                </button>
+               <ion-col>
+               
+                  <ion-icon (click)='removeAlarm(alarm)' color="success" class="alarmicon" name="checkmark-circle"></ion-icon>
+               
               </ion-col>
            </ion-row>
         </ion-card>

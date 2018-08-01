@@ -11,6 +11,7 @@ import { ConnectService } from '../services/connect.service';
  import { TranslationService } from '../services/translation.service';
 import { AlarmsService } from '../services/alarms.service';
 import { ModalPage } from '../modal/modal.page';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-alarms',
@@ -48,6 +49,7 @@ export class AlarmsPage implements OnInit, AfterContentInit, OnDestroy {
   constructor(
       private navCtrl: NavController,
       private connectService: ConnectService,
+      private ar: ActivatedRoute,
       private alarmSer: AlarmsService,
       private modalCtrl: ModalController,
       private loadingCtrl: LoadingController,
@@ -56,8 +58,9 @@ export class AlarmsPage implements OnInit, AfterContentInit, OnDestroy {
     ngOnInit() {
         // this.item = this.params.get('item');
         // this.link = this.item.links.self.href;
+        const id = this.ar.snapshot.params.id;
         this.alarms = null;
-        this.getResource('api/buildingAlarms');
+        this.getResource('api/buildingAlarms/' + id);
         this.state = 'inactive';
         this.pending = 0;
         this.cardinality = 0;
