@@ -3,12 +3,12 @@
         <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-      <ion-title>{{ this.buildings.header.title }}</ion-title>
+      <ion-title>{{ 'Building'}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let scorecard of scorecards" style="font-size : 16px" (click)="showMe(scorecard)">
+      <ion-item *ngFor="let scorecard of scorecards" style="font-size : 16px" routerLink="{{ scorecard.links.self.href}}">
         {{ scorecard.header.title }}
       </ion-item>
     </ion-list>

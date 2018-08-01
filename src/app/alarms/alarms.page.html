@@ -31,19 +31,13 @@
       </ion-card-content>
            <ion-row style="text-align:center">
              <ion-col>
-              
                  <ion-icon class="alarmicon" color="primary" name="information-circle" (click)='presentProfileModal(alarm)'></ion-icon>
-               
               </ion-col>
               <ion-col>
-                
                   <ion-icon *ngIf="alarm.isPending === false" color="danger" class="alarmicon"  name='lock' (click)='postponeAlarm(alarm)'></ion-icon>
-                 
               </ion-col>
                <ion-col>
-               
                   <ion-icon (click)='removeAlarm(alarm)' color="success" class="alarmicon" name="checkmark-circle"></ion-icon>
-               
               </ion-col>
            </ion-row>
         </ion-card>

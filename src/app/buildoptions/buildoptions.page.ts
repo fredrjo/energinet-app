@@ -17,7 +17,11 @@ export class BuildoptionsPage implements OnInit {
 
   ngOnInit() {
     const id = this.navParams.snapshot.params.id;
-    this.getResource('api/myBuildings/' + id);
+    if (id === undefined) {
+      this.getResource('api/myBuildings');
+    } else {
+      this.getResource('api/myBuildings/' + id);
+    }
   }
   getResource(resource) {
     if (this.scorecards == null) {
